@@ -1,0 +1,41 @@
+# C# / Visual Studio
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+*.dbmdl
+
+# Build outputs
+*.dll
+*.exe
+*.pdb
+
+# Config (keep template instead)
+appsettings.json
+App.config
+*.secret.*
+
+# Python / FastAPI
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+env/
+*.sqlite3
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+*.tmp
+
+# System files
+.DS_Store
+Thumbs.db
