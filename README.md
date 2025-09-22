@@ -55,3 +55,18 @@ Filesumm/
 install sql server and also add sql server manager for easier db mangement 
 create a database and also ensure in the c# application(gen3) there in the appliction.config there is the following :
 
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+    </startup>
+	<connectionStrings>
+		<add name="MyDbConnection"
+			 connectionString="Server=MACHINENAME\INSTANCENAME;Database=DATABASENAME;Trusted_Connection=True;TrustServerCertificate=True"
+				 providerName="System.Data.SqlClient" />
+	</connectionStrings>
+	
+</configuration>
+```
+
