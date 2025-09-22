@@ -10,10 +10,40 @@ namespace ControllerDEMO.logic
 {
     public class ControllerDemo
     {
-
-        //public string connectionString = "Data Source=localhost;Initial Catalog=JOSHYTESTIMONYdatadb;Integrated Security=True";
+        public ControllerDemo()
+        {
+            EnsureTableExists();
+        }
 
         public string connectionString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
+        
+        private void EnsureTableExists()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string sql = @"
+                    IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='EmployeeLeaveTypes' AND xtype='U')
+                    BEGIN
+                        CREATE TABLE EmployeeLeaveTypes (
+                            LeaveTypeID NVARCHAR(50) PRIMARY KEY,
+                            LeaveTypeName NVARCHAR(100),
+                            MaxDaysPerYear INT,
+                            CarryForwardAllowed BIT,
+                            PaidLeave BIT,
+                            RequiresApproval BIT,
+                            ImageData VARBINARY(MAX) NULL,
+                            FileData VARBINARY(MAX) NULL
+                        )
+                    END";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public string generateCode()
         {
             string prefix = "L";
@@ -66,7 +96,7 @@ namespace ControllerDEMO.logic
         
         public void saveLeaveTypeID ( string leaveTypeID)
         {
-
+            EnsureTableExists();
             using ( SqlConnection conn = new SqlConnection(connectionString)) 
             {
                 conn.Open();
@@ -108,6 +138,7 @@ namespace ControllerDEMO.logic
 
         public void saveLeaveTypeImage(string leaveTypeID, byte[] imageBytes)
         {
+            EnsureTableExists();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -134,7 +165,8 @@ namespace ControllerDEMO.logic
 
         public void saveUploadedFile( string leaveTypeID , byte[] fileBytes)
         {
-            using( SqlConnection conn = new SqlConnection( connectionString ))
+            EnsureTableExists();
+            using ( SqlConnection conn = new SqlConnection( connectionString ))
             {
                 conn.Open();
 
@@ -160,7 +192,7 @@ namespace ControllerDEMO.logic
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("The specified PDF file does not exist.", filePath);
 
-            filename = Path.GetFileName(filePath); // Now it’s actually used
+            filename = Path.GetFileName(filePath); 
             var fileStream = File.OpenRead(filePath);
             var fileContent = new StreamContent(fileStream);
             fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
