@@ -70,3 +70,7 @@ create a database and also ensure in the c# application(gen3) there in the appli
 </configuration>
 ```
 
+### 2. FASTAPI API SERVER SETUP 
+-Ensure  you have python installed
+-create a virtual environment(venv) then download the requirements in requirements.txt file
+-for the model itll automatically dowload when you do the first command , might take some time.
