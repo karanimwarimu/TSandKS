@@ -23,23 +23,29 @@ This project demonstrates a SIMPLE **full-stack workflow** combining:
 ---
 
 ## 📂 Project Structure
-repo-root/
-│── backend/ # FastAPI app
-│ ├── main.py
-│ ├── requirements.txt
-│ └── models/ # local models
+Filesumm/
+│── backend/                # Python API (Flask/FastAPI)
+│   ├── Flask_server_plus.py              # (rename flask_server.py → app.py)
+│   ├── requirements.txt    # dependencies
+│   ├── models             # local HuggingFace/LLM models (gitignored) (When you download your models you can place them here)
+│   
 │
-│── frontend/ # C# app
-│ ├── Controller.cs
-│ ├── Program.cs
-│ └── App.config
+│── frontend/               # C# desktop app
+│   ├── Program.cs
+│   ├── Controller.cs
+│   ├── App.config          (where your sql server connection lives )
+│   └── Gen3/               # (your WinForms/WPF project folder)
 │
-│── scripts/ # SQL setup scripts
-│ └── init.sql
+│── scripts/                # Database setup
+│   └── init.sql            # schema + seed data
+│
+│── examples/               # Example docs to test
+│   ├── testfile.docx
+│   ├── testfile.pdf
+│   └── zenv.docx
 │
 │── .gitignore
 │── README.md
-
 
 ---
 
