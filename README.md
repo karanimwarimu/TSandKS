@@ -71,6 +71,90 @@ create a database and also ensure in the c# application(gen3) there in the appli
 ```
 
 ### 2. FASTAPI API SERVER SETUP 
--Ensure  you have python installed
--create a virtual environment(venv) then download the requirements in requirements.txt file
--for the model itll automatically dowload when you do the first command , might take some time.
+Requirements: Python 3.9+
+
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate        # Linux/macOS
+venv\Scripts\activate           # Windows PowerShell
+
+# Install dependencies
+pip install -r backend/requirements.txt
+
+
+Models:
+
+By default, HuggingFace models (e.g., flan-t5-base) will download on first use into backend/models/
+
+You can also manually place models into this folder if needed
+
+Run the server:
+
+cd backend
+uvicorn app:app --reload
+
+
+Backend will start at: http://127.0.0.1:8000
+
+3. Frontend (C# App)
+
+Open the frontend/Gen3 project in Visual Studio
+
+Ensure App.config has correct DB connection string
+
+Build and run the project
+
+Use the interface to upload files/images, save them, and query via FastAPI
+
+### 📌 Usage Flow
+
+:Start SQL Server
+:start the fast api server 
+   where the venv is : venv\scripts\activate
+   cd cd where\you get \backend
+   python  flask_server_plus.py
+:Launch C# frontend app
+	Upload files → stored in DB → metadata saved
+	Use FastAPI endpoints or frontend UI to:
+	Query by ID, Name, or keyword
+	Summarize content with flan-t5-base(future addition)
+
+
+ ### Development Notes
+
+.gitignore excludes venv/, .vs/, and models/ folder (to avoid pushing large binaries).
+
+New developers should:
+
+Clone repo
+
+Manually create venv
+
+Install requirements from requirements.txt
+
+Run SQL script
+
+### 📖 Future Extensions
+put summarization feature 
+Swap summarization model with larger LLMs
+
+Cloud DB option (Azure SQL / PostgreSQL)
+
+JWT auth for FastAPI endpoints
+
+Dockerize backend for easier deployment
+
+### 🤝 Contributing
+
+Fork the repo
+
+Create a feature branch (git checkout -b feature-x)
+
+Commit changes
+
+Push branch & open a Pull Request
+
+### 📜 License
+
+MIT License. Free to use, modify, and distribute.
+   
