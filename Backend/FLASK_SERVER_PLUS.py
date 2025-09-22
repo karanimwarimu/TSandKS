@@ -6,9 +6,15 @@ import json
 
 app = Flask(__name__)
 
+"""
 model_name = r"E:\BIG\MODEL\flan-t5-base"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+"""
+
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "flan-t5-base")
+tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-base", cache_dir=MODEL_PATH)
+model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-base", cache_dir=MODEL_PATH)
 
 @app.route('/extract', methods=['POST'])
 def extract_info():
